@@ -1,18 +1,15 @@
 # Experience API SCORM Profile
-> An accessible, printer-ready and reader-friendly version of this document is also available as a gitbook here: https://adl.gitbooks.io/scorm-profile-xapi/content/
 
 ## Advanced Distributed Learning (ADL)
 
->"Copyright 2016 - 2017 Advanced Distributed Learning (ADL) Initiative, U.S. Department of Defense
+>"Copyright 2016 Advanced Distributed Learning (ADL) Initiative, U.S. Department of Defense
 
->Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except
->in compliance with the License. You may obtain a copy of the License at
+>Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. You may obtain a copy of the License at
 >http://www.apache.org/licenses/LICENSE-2.0
 
 >Unless required by applicable law or agreed to in writing, software distributed under the License
 >is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
->or implied. See the License for the specific language governing permissions and limitations under
->the License."  
+>or implied. See the License for the specific language governing permissions and limitations under the License."  
 
 
 ## Glossary
@@ -27,7 +24,7 @@ A specification created to provide a way to represent and report experiences bet
 ##### Internationalized Resource Identifier (IRI):  
 A format of an identifier, related to URI, that supports the Universal Character Set (Unicode). See [RFC 3987](http://tools.ietf.org/html/rfc3987).  
 ##### Statement:  
-The xAPI data format for representing learner experience data. See [xAPI Statement](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#20-statements).
+The xAPI data format for representing learner experience data. See [xAPI Statement](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#statement).
 
 ## 1.0 Purpose
 The Experience API (xAPI) was created in response to the eLearning community’s desire to modernize the Sharable Content Object Reference Model (SCORM) capabilities, which was initially developed to make courseware interoperable with learning management systems. Since its introduction in 2000, SCORM has played a critical role in the proliferation of online training and education courses. The Experience API introduces a new paradigm for tracking and recording learning-related data. Learners can be tracked as they perform work tasks, produce work outputs, communicate, collaborate, and engage in just about any other online activity. This API uses a flexible data format that supports many different use cases and needs. However with this flexibility arises the need for developers to formalize the data they track and what that data means. By formalizing the data reported by content and the format of that data, tools can be created that can make sense of that data.
@@ -50,7 +47,7 @@ However there are use cases that are difficult if not impossible to meet with SC
   - The interface described in SCORM only exists during the life of a sharable content object (SCO) communication session. There is no SCORM API that exists outside of that communication session.
   - Reporting and data access requirements are not standardized in SCORM resulting in proprietary, LMS-specific, reporting functionality that can differ between vendors.  
 
-## 2.0 When to Use this Profile
+##2.0 When to Use this Profile
 The Experience API by design is flexible enough to support many training scenarios. This flexibility enables it to support learning solutions that are currently difficult or impossible in the SCORM model. But flexibility without consensus on how to represent the data prevents interoperability.  
 
 This profile should be used when the organization already has a SCORM learning environment but wants to utilize the xAPI to enable features that SCORM does not support, such as the examples listed in section 1.0. These can include:  
@@ -60,7 +57,7 @@ This profile should be used when the organization already has a SCORM learning e
 Use of this profile allows organizations to incrementally transition from a centralized SCORM LMS to diverse and flexible systems without the loss of interoperability. It also allows for systems, such as SCORM LMSs and third party reports, to treat experiences from SCORM content and non SCORM content the same way.  
 
 ## 3.0 How to Use this Profile
-This document is intended to be used in addition to the [xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-About.md#experience-api). All communication, data formats and experiences shall follow the requirements in the xAPI specification. The guidance provided in this document is to add information specifically to support SCORM communications in xAPI format.  
+This document is intended to be used in addition to the [xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md). All communication, data formats and experiences shall follow the requirements in the xAPI specification. The guidance provided in this document is to add information specifically to support SCORM communications in xAPI format.  
 
 ### 3.1 Supporting SCORM Features
 SCORM is a mature and formal specification that allows for delivering content and tracking learner’s progress. By identifying the key features in SCORM, it is possible to provide guidance on how to implement the same features with the xAPI, such as:
@@ -72,20 +69,20 @@ SCORM is a mature and formal specification that allows for delivering content an
 ### 3.2 General Guidance on Statements
 In the xAPI, activity providers and activities issue statements about the learner’s experiences. These statements hold the data about the experience, such as, if the learner was successful, or did the learner complete the content. Additional information and guidance is provided below. All statements issued shall meet the requirements in the xAPI specification and the guidance described in the following sections.  
 
-#### Internationalized Resource Identifier (IRI)
-[IRIs](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-About.md#def-iri) are used as identifiers in many parts of the xAPI specification. Their syntax consists of a hierarchical part, which is broken into an authority and a path. The authority part shall represent a domain of your organization - ie. adlnet.gov, army.mil. The path part shall identify the object - /courses/cs/CS101. If you are identifying something that cannot be represented by an fully qualified path, use a tag IRI - tag:adlnet.gov,2013:expapi:0.9:extensions - where the domain is a domain you control, the date is the date this tag was created, the next part is the type - scorm, xapi, the version - 2004, 1.2, 1.0.1, and the last part is the identifier. (see [http://www.ietf.org/rfc/rfc4151.txt](http://www.ietf.org/rfc/rfc4151.txt))  
+#### IRIs
+[IRIs](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#def-iri) are used as identifiers in many parts of the xAPI specification. Their syntax consists of a hierarchical part, which is broken into an authority and a path. The authority part shall represent a domain of your organization - ie. adlnet.gov, army.mil. The path part shall identify the object - /courses/cs/CS101. If you are identifying something that cannot be represented by an fully qualified path, use a tag IRI - tag:adlnet.gov,2013:expapi:0.9:extensions - where the domain is a domain you control, the date is the date this tag was created, the next part is the type - scorm, xapi, the version - 2004, 1.2, 1.0.1, and the last part is the identifier. (see [http://www.ietf.org/rfc/rfc4151.txt](http://www.ietf.org/rfc/rfc4151.txt))  
 
 __Good IRIs__  
 Good IRIs uniquely identify an object  
-  <pre>http://adlnet.gov/activities/courses/CS/CS101</pre>
-  <pre>http://mydomain.com/content/understanding-fire-safety</pre>
+  <pre>`http://adlnet.gov/activities/courses/CS/CS101`</pre>
+  <pre>`http://mydomain.com/content/understanding-fire-safety`</pre>
 __Bad IRIs__  
 Bad IRIs are not unique and could conflict with others using the same identifier  
-  <pre>act:my-activity01</pre>
-  <pre>http://example.com/activity/01</pre>
+    <pre>`act:my-activity01`</pre>
+    <pre>`http://example.com/activity/01`</pre>
 
 #### Actor
-The actor property refers to the learner that is interacting with the activity. The actor should be able to be mapped back to the learner in the LMS. Any of the [Actor formats described in the xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#actor) are allowed. However some formats can potentially expose personally identifiable information, it is recommended to use a format that protects the learner’s information.  
+The actor property refers to the learner that is interacting with the activity. The actor should be able to be mapped back to the learner in the LMS. Any of the [Actor formats described in the xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#actor) are allowed. However some formats can potentially expose personally identifiable information, it is recommended to use a format that protects the learner’s information.  
 __Agent__
 ``` javascript
   "actor":{
@@ -118,7 +115,7 @@ __Group__
 ```  
 
 #### Verb
-Verbs in the xAPI spec represent the action that is being recorded for this experience, such as "read" a book and "answered" a question. The xAPI allows for any verb to be used within a statement assuming it follows the [rules defined in the xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#243-verb). However this flexibility causes issues when trying to report on the data. For consistency and interoperability, those implementing this profile shall use the verbs maintained by ADL at http://adlnet.gov/expapi/verbs/, and use the definition and usage on the ADL Verb pages as guidance.  
+Verbs in the xAPI spec represent the action that is being recorded for this experience, such as "read" a book and "answered" a question. The xAPI allows for any verb to be used within a statement assuming it follows the [rules defined in the xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#verb). However this flexibility causes issues when trying to report on the data. For consistency and interoperability, those implementing this profile shall use the verbs maintained by ADL at http://adlnet.gov/expapi/verbs/, and use the definition and usage on the ADL Verb pages as guidance.  
 __Verb__  
 ``` javascript
 "verb":{
@@ -188,13 +185,13 @@ Some verbs have special meaning when related to SCORM. Implementers of this prof
 </table>
 
 #### Object
-The object property describes the item with which the learner is interacting. The type of object could be an Activity, an Actor or Group, or a Statement (as StatementRef or Sub-Statement). If it is an Actor or a Statement follow the [rules defined in the xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#2442-when-the-object-is-an-agent-or-a-group). However if it is an Activity, follow the rules in the xAPI specification and the rules outlined below.  
+The object property describes the item with which the learner is interacting. The type of object could be an Activity, an Actor or Group, or a Statement (as StatementRef or Sub-Statement). If it is an Actor or a Statement follow the rules defined in the [xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#414-object). However if it is an Activity, follow the rules in the xAPI specification and the rules outlined below.  
 
 ##### Activity
 Things like courses, SCOs, and objectives are considered activities. Since these experiences are commonly what SCORM content wants to capture, the following sections detail the recommended usage to create interoperable statements.  
 
 ###### Activity IRI
-Activity IDs are required to be [IRIs](http://en.wikipedia.org/wiki/Internationalized_resource_identifier) and follow the requirements within the [xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#2441-when-the-objecttype-is-activity). In addition it is recommended that the IRIs are IRLs and that the location contains the metadata ([Activity Definition](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#activity-definition)) of the activity. Additionally activity IRIs should be constructed in a predictable way to make interpreting those IRIs possible in a standard way.  
+Activity IDs are required to be [IRIs](http://en.wikipedia.org/wiki/Internationalized_resource_identifier) and follow the requirements within the [xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#4141-when-the-objecttype-is-activity). In addition it is recommended that the IRIs are IRLs and that the location contains the metadata ([Activity Definition](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#activity-definition)) of the activity. Additionally activity IRIs should be constructed in a predictable way to make interpreting those IRIs possible in a standard way.  
 
 ###### Course IRI
 The course IRI may be decided by the organization as long as it follows the IRI rules described in the xAPI spec. The activity provider or activity must support the launch courseIRI property, described in the launch section of this document, and update the course IRI to that property value if the local and launch-provided values differ. This allows for content to use the most up-to-date identifier in the context of the current launch.  
@@ -214,7 +211,7 @@ __Guidelines for Activity IRI Construction__
   - Objective path is any IRI path to the objective activity definition, ie `recognize-shapes-obj/`
 
 ###### Activity Definition
-The [activity definition](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#activity-definition) provides information about the activity. At a minimum all activities should include an activity definition with a name, description and type. If the activity is representing a SCORM interaction, follow the rules outlined in the xAPI specification for [interaction activities](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#interaction-activities).  
+The [activity definition](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#activity-definition) provides information about the activity. At a minimum all activities should include an activity definition with a name, description and type. If the activity is representing a SCORM interaction, follow the rules outlined in the xAPI specification for [interaction activities](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#interactionacts).  
 
 ###### Activity Types  
 Activity types are used to identify what an activity represents, both to humans and machines. The type could be used to reporting systems to determine, for example, what Statements are about assessments. Including an activity type is recommended. The following table describes types to be used for common SCORM concepts such as SCOs and interactions.  
@@ -228,45 +225,36 @@ Activity types are used to identify what an activity represents, both to humans 
 <tr><td>interaction</td><td><a href="http://adlnet.gov/expapi/activities/interaction">http://adlnet.gov/expapi/activities/interaction</a></td></tr>
 <tr><td>objective</td><td><a href="http://adlnet.gov/expapi/activities/objective">http://adlnet.gov/expapi/activities/objective</a></td></tr>
 <tr><td>attempt</td><td><a href="http://adlnet.gov/expapi/activities/attempt">http://adlnet.gov/expapi/activities/attempt</a></td></tr>
-<tr><td>profile</td><td><a href="http://adlnet.gov/expapi/activities/profile">http://adlnet.gov/expapi/activities/profile</a></td></tr>
 </table>
 
 #### Result
-The [result property of a statement](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#245-result) represents the outcome of a learner experience. Statements issued using a result shall follow the requirements listed in the xAPI specification and the additional guidance described in this document.
+The [result property of a statement](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#415-result) represents the outcome of a learner experience. Statements issued using a result shall follow the requirements listed in the xAPI specification and the additional guidance described in this document.
 
 #### Context
-The context property adds additional contextual information about the learner experience. Information like who is the instructor of this content, with what registration this experience is associated, or to what activities this experience is related. Statements shall meet all the [requirements in the xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#246-context) and the additional guidelines described in this document.  
+The context property adds additional contextual information about the learner experience. Information like who is the instructor of this content, with what registration this experience is associated, or to what activities this experience is related. Statements shall meet all the [requirements in the xAPI specification](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#416-context) and the additional guidelines described in this document.  
 
 ##### Context Registration
-[Context registration](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#2461-registration-property) is used to store an LMS registration value. This is value is up to the organization, LMS or developer and provides a way to easily query the LRS for Statements related to the registration value. [See the xAPI spec for query options](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#213-get-statements).  
+[Context registration](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#4161-registration-property) is used to store an LMS registration value. This is value is up to the organization, LMS or developer and provides a way to easily query the LRS for Statements related to the registration value. [See the xAPI spec for query options](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#723-getstatements).  
 
 ##### Context Activities
-[Context activities](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#2462-contextactivities-property) allow statements to be related to other activities. Regarding this profile, the context activities are used to relate Statements by SCO, course, assessment, or other groupings. The following rules are defined to support those groupings.  
+[Context activities](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#4162-contextactivities-property) allow statements to be related to other activities. Regarding this profile, the context activities are used to relate Statements by SCO, course, assessment, or other groupings. The following rules are defined to support those groupings.  
 
 <table>
 <tr><th>Type</th><th>Use</th></tr>
 <tr><td>parent</td><td>Used to identify the activity which contains the current activity, such as the activity of the SCO that contains an assessment, interaction, or objective.</td></tr>
 <tr><td>grouping</td><td>Used to identify the course activity and any other activities that should be grouped together.</td></tr>
-<tr><td>category</td><td>All Statements based on this profile shall include the xAPI SCORM Profile activity.<br> 
-<pre>
-{
-  "id":"https://w3id.org/xapi/scorm", 
-  "definition": {
-    "type":"http://adlnet.gov/expapi/activities/profile"
-  }
-}</pre>
-</td></tr>
+<tr><td>category</td><td>All Statements based on this profile shall include the xAPI SCORM Profile activity.<br> {"id":"https://w3id.org/xapi/scorm"}</td></tr>
 <tr><td>other</td><td>Up to the organization or developer.</td></tr>
 </table>
 
 #### Timestamp
-The [timestamp property](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#247-timestamp) gives the activity provider or activity the ability to set the date and time when the experience occurred. This is different from the [stored timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#248-stored) property, which indicates when the LRS saved the statement about the experience. All statements shall set the timestamp property. By doing this, it makes it possible to order statements in the same order as they were submitted by the activity provider or activity.
+The [timestamp property](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#417-timestamp) gives the activity provider or activity the ability to set the date and time when the experience occurred. This is different from the [stored timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#418-stored) property, which indicates when the LRS saved the statement about the experience. All statements shall set the timestamp property. By doing this, it makes it possible to order statements in the same order as they were submitted by the activity provider or activity.
 
 #### Authority
-The [authority property](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#249-authority) for each statement is set by the LRS to the agent who submitted the statement. This property can be used to filter statements based on the activity provider or activity. By using this property as a GET statements filter, it is possible to narrow down the returned statements to the ones submitted by agents whom your organization trusts.
+The [authority property](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#419-authority) for each statement is set by the LRS to the agent who submitted the statement. This property can be used to filter statements based on the activity provider or activity. By using this property as a GET statements filter, it is possible to narrow down the returned statements to the ones submitted by agents whom your organization trusts.
 
 #### Attachments
-Attachments give the ability to include supporting documents or information that do not directly map to a section of an xAPI statement. Examples of attachments include PDF certificates, essays, videos, and the JSON web signature. Attachments are not returned by the LRS by default, but can be included by adding the attachments filter to GET statements requests. [See the xAPI specification for more details](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#2411-attachments).
+Attachments give the ability to include supporting documents or information that do not directly map to a section of an xAPI statement. Examples of attachments include PDF certificates, essays, videos, and the JSON web signature. Attachments are not returned by the LRS by default, but can be included by adding the attachments filter to GET statements requests. [See the xAPI specification for more details](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#signature).
 
 ## 4.0 Launching and Initializing Activities
 In a SCORM environment, an activity is launched by the LMS. The LMS can provide activities with launch parameters and initial data model values. This helps a SCO to work correctly in the current environment. In comparison, xAPI activities can exist outside of an LMS - information such as learner name and identifier, or the location of the xAPI LRS may be unknown at the launch of the activity.
@@ -328,7 +316,7 @@ SCORM has a temporal model which describes interaction states such as an attempt
 
 ### Initializing an attempt
 *  Generate the activity attempt IRI. The way this is done is up to the developer. The only requirement is that the attempt IRI is unique.  
-*  [Add the attempt IRI](#set-activity-state-with-current-attempt) to the `attempts` array in the Activity State document either by creating the `attempts` array or appending to the existing array. See the [Appendix](#scorm-activity-state) for the Activity State format.  
+*  Add the attempt IRI to the `attempts` array in the Activity State document either by creating the `attempts` array or appending to the existing array. See the [Appendix](#scorm-activity-state) for the Activity State format.  
 *  Create a Statement  
     *  Set `actor` to the learner's agent object  
     *  Set `verb` to the ADL Verb [initialized](http://adlnet.gov/expapi/verbs/initialized)  
@@ -336,7 +324,7 @@ SCORM has a temporal model which describes interaction states such as an attempt
     *  Set `object.definition.type` to `http://adlnet.gov/expapi/activities/lesson`
     *  Set `context.contextActivities.grouping` array to include the attempt activity and the course activity  
     *  Set `context.contextActivities.category` array to include the xAPI SCORM Profile activity ([See context for profile activity](#context))  
-    *  Set `timestamp` to the time the attempt was initialized, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#247-timestamp) for details  
+    *  Set `timestamp` to the time the attempt was initialized, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#417-timestamp) for details  
 
 ([See an example in the Appendix](#initialize-a-sco-attempt))  
 
@@ -349,7 +337,7 @@ During the session, Statements are collected and sent to the LRS much like SCORM
     *  set `context.contextActivities.parent` array to include the activity object for the SCO
 *  Set `context.contextActivities.grouping` array to include the attempt activity and the course activity  
 *  Set `context.contextActivities.category` array to include the xAPI SCORM Profile activity ([See context for profile activity](#context))
-*  Set `timestamp` to the time the attempt was initialized, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#247-timestamp) for details
+*  Set `timestamp` to the time the attempt was initialized, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#417-timestamp) for details
 
 ### Terminating an attempt  
 *  Create a Statement  
@@ -359,7 +347,7 @@ During the session, Statements are collected and sent to the LRS much like SCORM
     *  Set `object.definition.type` to `http://adlnet.gov/expapi/activities/lesson`
     *  Set `context.contextActivities.grouping` array to include the attempt activity and the course activity  
     *  Set `context.contextActivities.category` array to include the xAPI SCORM Profile activity ([See context for profile activity](#context))  
-    *  Set `timestamp` to the time the attempt was terminated, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#247-timestamp) for details
+    *  Set `timestamp` to the time the attempt was terminated, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#417-timestamp) for details
     *  Set `result` to the overall result for the SCO
          *  If success_status of the SCO is known, `success` is `true` if success_status is passed, and `false` if success_status is failed
          *  If completion_status of the SCO is known, `completion` is `true` if completion_status is completed, and `false` if completion_status is incomplete
@@ -376,7 +364,7 @@ To suspend a SCO attempt,
     *  Set `object.definition.type` to `http://adlnet.gov/expapi/activities/lesson`
     *  Set `context.contextActivities.grouping` array to include the attempt activity and the course activity  
     *  Set `context.contextActivities.category` array to include the xAPI SCORM Profile activity ([See context for profile activity](#context))  
-    *  Set `timestamp` to the time the attempt was suspended, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#247-timestamp) for details
+    *  Set `timestamp` to the time the attempt was suspended, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#417-timestamp) for details
     *  (Optional) Set `result` to the overall result for the SCO
          *  If success_status of the SCO is known, `success` is `true` if success_status is passed, and `false` if success_status is failed
          *  If completion_status of the SCO is known, `completion` is `true` if completion_status is completed, and `false` if completion_status is incomplete
@@ -394,12 +382,12 @@ To resume the SCO attempt,
     *  Set `object.definition.type` to `http://adlnet.gov/expapi/activities/lesson`
     *  Set `context.contextActivities.grouping` array to include the attempt activity, created during the original initialization of the SCO, and the course activity  
     *  Set `context.contextActivities.category` array to include the xAPI SCORM Profile activity ([See context for profile activity](#context))  
-    *  Set `timestamp` to the time the attempt was initialized, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#247-timestamp) for details    
+    *  Set `timestamp` to the time the attempt was initialized, see [timestamp](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#417-timestamp) for details    
 
-([See an example in the Appendix](#resume-a-sco))  
+([See an example in the Appendix](##resume-a-sco))  
 
 ### Querying the LRS for Statements in an attempt  
-Querying systems can find the the list of attempt IRIs for a SCO by [getting the Activity State](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#stateres). The resulting JSON object contains an `attempts` array containing the attempt IRIs ordered from first to latest attempt. The querying system can get the Statements from the LRS by [querying for all Statements](#find-all-statements-from-the-latest-attempt) with the attempt IRI. See the Appendix for [query examples](#query-examples).  
+Querying systems can find the the list of attempt IRIs for a SCO by [getting the Activity State](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#74-state-api). The resulting JSON object contains an `attempts` array containing the attempt IRIs ordered from first to latest attempt. The querying system can get the Statements from the LRS by [querying for all Statements](#find-all-statements-from-the-latest-attempt) with the attempt IRI. See the Appendix for [query examples](#query-examples).  
 
 ### Representing the temporal model with xAPI Statements  
 This section describes when to issue the statements outlined above to represent the SCORM temporal model.  
@@ -495,10 +483,7 @@ __Experience API Statement:__
          ],
          "category": [
             {
-               "id": "https://w3id.org/xapi/scorm", 
-               "definition": {
-                 "type":"http://adlnet.gov/expapi/activities/profile"
-               }
+               "id": "https://w3id.org/xapi/scorm"
             }
          ]
       }
@@ -507,12 +492,11 @@ __Experience API Statement:__
 ```  
 
 #### Comments From LMS
-Comments From LMS allows an LMS to post comments for the current activity. This information may be specific
-to the current attempt on the activity and therefore is part of the [SCORM Activity Attempt State Object](#scorm-activity-attempt-state).  
+Comments From LMS allows an activity to see comments about the content. The value is the same for all learners, and is made available for each activity. For those reasons, Comments From LMS is available at the Activity Profile endpoint.  
 __SCORM 2004:__ `cmi.comments_from_lms`  
 __SCORM 1.2:__ `cmi.comments_from_lms`  
-__Experience API:__ `comments_from_lms` in the [SCORM Activity Attempt State Object](#scorm-activity-attempt-state)  
-See [Get xAPI SCORM Activity Attempt State](#get-xapi-scorm-activity-attempt-state) for retrieving the Activity Attempt State Object.  
+__Experience API:__ `comments_from_lms` in the [SCORM Activity Profile Object](#scorm-activity-profile)  
+See [Get xAPI SCORM Activity Profile](#get-xapi-scorm-activity-profile) for retrieving the Activity Profile Object.  
 
 #### Completion Status
 Completion indicates if the learner has completed the activity. The use of this Statement is for journaling/auditing purposes and does not necessarily indicate completion of the activity. If it is determined that the activity must have a completion status, set it explicitly as the [result of terminated Statement](#terminating-an-attempt).  
@@ -576,10 +560,7 @@ __Experience API Statement:__
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
@@ -664,15 +645,11 @@ __Experience API Statement:__
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
-    },
-    "timestamp": "2014-08-01T15:10:04-04:00"
+    }
 }
 ```  
 
@@ -737,15 +714,11 @@ __Experience API Statement:__
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
-    },
-    "timestamp": "2014-08-01T15:20:04-04:00"
+    }
 }
 ```   
 
@@ -812,15 +785,11 @@ __Experience API Statement:__
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
-    },
-    "timestamp": "2014-08-01T15:25:04-04:00"
+    }
 }
 ```  
 
@@ -885,20 +854,16 @@ __Experience API Statement:__
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
-    },
-    "timestamp": "2014-08-01T15:15:04-04:00"
+    }
 }
 ```  
 
 #### Interactions
-Interactions can be recorded using the xAPI. Interactions can be described in the xAPI using a predefined format that maps to SCORM interactions. Activity providers and activities shall use the ADL Verb `http://adlnet.gov/expapi/verbs/responded`, the result.response attribute of a statement for the response, and an activity definition as described in the xAPI specification to report the learner’s responses for an interaction. See the [interaction activities](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#interaction-activities) section and the [interaction appendix](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#Appendix2C) for more details.
+Interactions can be recorded using the xAPI. Interactions can be described in the xAPI using a predefined format that maps to SCORM interactions. Activity providers and activities shall use the ADL Verb `http://adlnet.gov/expapi/verbs/responded`, the result.response attribute of a statement for the response, and an activity definition as described in the xAPI specification to report the learner’s responses for an interaction. See the [interaction activities](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#interaction-activities) section and the [interaction appendix](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#AppendixC) for more details.
 
 > NOTE: The IRI used to identify an interaction is recommended to follow the format: `<courseiri>/<scoid>/interaction/<interactionid>`  
 
@@ -1080,10 +1045,7 @@ _Statement with Local Objective_
          ],
          "category": [
             {
-               "id": "https://w3id.org/xapi/scorm", 
-               "definition": {
-                 "type":"http://adlnet.gov/expapi/activities/profile"
-               }
+               "id": "https://w3id.org/xapi/scorm"
             }
          ]
       }
@@ -1114,7 +1076,7 @@ _Statement with Sequencing and Navigation Global Objective_
          "description":{
             "en-US":"Show proficiency in creating if-else blocks"
          },
-         "type": "http://adlnet.gov/expapi/activities/objective"
+         "type": "http://adlnet.gov/expapi/activities/lesson"
       }
    },
    "context":{
@@ -1161,10 +1123,7 @@ _Statement with Sequencing and Navigation Global Objective_
          ],
          "category": [
             {
-               "id": "https://w3id.org/xapi/scorm", 
-               "definition": {
-                 "type":"http://adlnet.gov/expapi/activities/profile"
-               }
+               "id": "https://w3id.org/xapi/scorm"
             }
          ]
       }
@@ -1239,10 +1198,7 @@ __Experience API Statement:__
          ],
          "category": [
             {
-               "id": "https://w3id.org/xapi/scorm", 
-               "definition": {
-                 "type":"http://adlnet.gov/expapi/activities/profile"
-               }
+               "id": "https://w3id.org/xapi/scorm"
             }
          ]
       }
@@ -1326,10 +1282,7 @@ __Experience API Statement:__
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
@@ -1401,10 +1354,7 @@ __Experience API Statement:__
          ],
          "category": [
             {
-               "id": "https://w3id.org/xapi/scorm", 
-               "definition": {
-                 "type":"http://adlnet.gov/expapi/activities/profile"
-               }
+               "id": "https://w3id.org/xapi/scorm"
             }
          ]
       }
@@ -1474,10 +1424,7 @@ __Experience API Statement:__
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
@@ -1544,10 +1491,7 @@ __Experience API Statement:__
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
@@ -1614,7 +1558,7 @@ GET
 statements?agent=%7B%E2%80%9Caccount%E2%80%9D%3A%7B%E2%80%9ChomePage%E2%80%9D%3A%E2%80%9Chttp%3A%2F%2Fadlnet.gov%2Faccounts%2F%E2%80%9D%2C%E2%80%9Cname%E2%80%9D%3A%E2%80%9C449-002%E2%80%9D%7D%7D&related_agents=true
 </pre>
 #### Signed Statements
-Another option for identifying the authenticity of a statement is by issuing signed statements. A statement is signed by an activity provider attaching a JSON web signature to the statement. This digital signature can be retrieved from the LRS with the statement and verified before considering the statement in the results. See the xAPI Specification for [how to sign](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#26-signed-statements) and [retrieve signed statements](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#25-retrieval-of-statements).
+Another option for identifying the authenticity of a statement is by issuing signed statements. A statement is signed by an activity provider attaching a JSON web signature to the statement. This digital signature can be retrieved from the LRS with the statement and verified before considering the statement in the results. See the xAPI Specification for [how to sign](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#44-signed-statements) and [retrieve signed statements](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#723-getstatements).
 
 ##### Retrieving Statements with their Attachments
 <pre>
@@ -1724,10 +1668,7 @@ __xAPI:__ actor 500-627-490 initialized lesson01 with attempt id (x) in course C
          ],
          "category": [
             {
-               "id": "https://w3id.org/xapi/scorm", 
-               "definition": {
-                 "type":"http://adlnet.gov/expapi/activities/profile"
-               }
+               "id": "https://w3id.org/xapi/scorm"
             }
          ]
       }
@@ -1795,10 +1736,7 @@ __xAPI:__ actor 500-627-490 terminated lesson01 with attempt id (x) in the cours
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
@@ -1874,10 +1812,7 @@ __xAPI:__ agent 500-627-490 suspended lesson01 with attempt id (x) in the course
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
@@ -1946,10 +1881,7 @@ __xAPI:__ agent 500-627-490 resumed lesson01 with same attempt id in the course 
             ],
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
@@ -1996,10 +1928,7 @@ __xAPI:__ agent 500-627-490 completed the course CS204 with a score of 0.85 and 
         "contextActivities": {
             "category": [
                {
-                  "id": "https://w3id.org/xapi/scorm", 
-                  "definition": {
-                    "type":"http://adlnet.gov/expapi/activities/profile"
-                  }
+                  "id": "https://w3id.org/xapi/scorm"
                }
             ]
         }
@@ -2010,7 +1939,7 @@ __xAPI:__ agent 500-627-490 completed the course CS204 with a score of 0.85 and 
 
 ### Query Examples  
 #### Find Statements by activity IRI  
-* Issue a [get Statements](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#213-get-statements) request to the LRS  
+* Issue a [get Statements](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#723-getstatements) request to the LRS  
 
 <table>
    <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
@@ -2028,7 +1957,7 @@ https://lrs.adlnet.gov/xapi/statements
 &related_activities=true
 ```  
 
-*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#25-retrieval-of-statements) of all the Statements that contained an activity with the requested IRI  
+*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#retstmts) of all the Statements that contained an activity with the requested IRI  
 
 
 #### Find Attempt IRIs for a SCO
@@ -2042,22 +1971,22 @@ https://lrs.adlnet.gov/xapi/statements
 #### Find all Statements from the Latest Attempt  
 *  [Find the latest attempt IRI](#find-the-latest-attempt-iri) for the SCO  
 *  [Find the Statements by the latest attempt IRI](#find-statements-by-activity-iri)  
-*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#25-retrieval-of-statements) of all the Statements that contained an activity with the requested IRI  
+*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#retstmts) of all the Statements that contained an activity with the requested IRI  
 
 #### Find all Statements for a SCO  
 *  Identify the SCO IRI from launch, activity IRI generation, or out-of-band configuration  
 *  [Find the Statements by the SCO IRI](#find-statements-by-activity-iri)  
-*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#25-retrieval-of-statements) of all the Statements that contained an activity with the requested IRI  
+*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#retstmts) of all the Statements that contained an activity with the requested IRI  
 
 #### Find all Statements for a course  
 *  Identify the course IRI from launch
 *  [Find the Statements by the course IRI](#find-statements-by-activity-iri)
-*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#25-retrieval-of-statements) of all the Statements that contained an activity with the requested IRI  
+*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#retstmts) of all the Statements that contained an activity with the requested IRI  
 
 #### Find all learner's Statements for a course
 *  Identify the course IRI from launch
 *  Identify the learner's agent (actor) object from launch
-*  Issue a [get Statements](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#213-get-statements) request to the LRS  
+*  Issue a [get Statements](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#723-getstatements) request to the LRS  
 
 <table>
    <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
@@ -2075,16 +2004,16 @@ https://lrs.adlnet.gov/xapi/statements
 ?agent={"account": {
             "homePage": "http://lms.adlnet.gov/",
             "name": "500-627-490"}}
-&activity=http://adlnet.gov/courses/compsci/CS204/lesson01/01/attempt/50fd6961-ab6c-4e75-e6c7-ca42dce50dd6
+?activity=http://adlnet.gov/courses/compsci/CS204/lesson01/01/attempt/50fd6961-ab6c-4e75-e6c7-ca42dce50dd6
 &related_activities=true
 ```  
 
-*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#25-retrieval-of-statements) of all the Statements that contained an activity with the requested IRI and the actor as the learner agent.  
+*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#retstmts) of all the Statements that contained an activity with the requested IRI and the actor as the learner agent.  
 
 #### Find learner's results for each SCO in a course  
 *  Identify the course IRI from launch
 *  Identify the learner's agent (actor) object from launch
-*  Issue a [get Statements](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#213-get-statements) request to the LRS  
+*  Issue a [get Statements](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#723-getstatements) request to the LRS  
 
 <table>
    <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
@@ -2103,16 +2032,16 @@ https://lrs.adlnet.gov/xapi/statements
 ?agent={"account": {
             "homePage": "http://lms.adlnet.gov/",
             "name": "500-627-490"}}
-&verb=http://adlnet.gov/expapi/verbs/terminated
-&activity=http://adlnet.gov/courses/compsci/CS204/lesson01/01/attempt/50fd6961-ab6c-4e75-e6c7-ca42dce50dd6
+?verb=http://adlnet.gov/expapi/verbs/terminated
+?activity=http://adlnet.gov/courses/compsci/CS204/lesson01/01/attempt/50fd6961-ab6c-4e75-e6c7-ca42dce50dd6
 &related_activities=true
 ```  
 
-*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#25-retrieval-of-statements) of all the Statements that contained an activity with the requested IRI, the terminated ADL verb and the actor as the learner agent.  
+*  The response content is a [Statement Result](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#retstmts) of all the Statements that contained an activity with the requested IRI, the terminated ADL verb and the actor as the learner agent.  
 *  Each of these terminated Statements contain the SCO status in the `result` parameter, such as `score`, `completed` and `success`.  
 
 #### Get xAPI SCORM Activity State
-*  Issue a [get Activity State](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#23-state-resource) request to the LRS  
+*  Issue a [get Activity State](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#74-state-api) request to the LRS  
 
 <table>
    <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
@@ -2136,39 +2065,8 @@ https://lrs.adlnet.gov/xapi/activities/state
 
 *  The response content is a [SCORM Activity State](#scorm-activity-state) JSON object.
 
-#### Set xAPI SCORM Activity State  
-*  Issue a [set Activity State](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#23-state-resource) request to the LRS  
-
->NOTE: The request method change of POST or PUT is based on xAPI requirements for updating vs creating a new document. This example demonstrates a generalized case. Organizations are free to update/create the document however works best within the [rules defined in xAPI](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#json-procedure-with-requirements).
-
-<table>
-   <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
-   <tr><td>POST/PUT</td><td>activities/state</tr>
-   <tr><th>Parameter</th><th>Value</th></tr>
-   <tr><td>activityId</td><td>SCO IRI</td></tr>
-   <tr><td>agent</td><td>Learner's Agent object</td></tr>
-   <tr><td>stateId</td><td>https://w3id.org/xapi/scorm/activity-state</td></tr>
-</table>  
-
-_Unencoded and formatted for readability_  
-```
-POST/PUT
-https://lrs.adlnet.gov/xapi/activities/state
-?activityId=http://adlnet.gov/courses/compsci/CS204/lesson01/01
-&agent={"account": {
-            "homePage": "http://lms.adlnet.gov/",
-            "name": "500-627-490"}}
-&stateId=https://w3id.org/xapi/scorm/activity-state
-
-Content Body
-{
-    "attempts": ["http://adlnet.gov/courses/compsci/CS204/lesson01/01/attempt/01"]
-}
-```  
-
 #### Get xAPI SCORM Activity Attempt State
-*  Issue a [get Activity State](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#23-state-resource) request to the LRS  
-*  The response content is a [SCORM Attempt State](#scorm-activity-attempt-state) JSON object.  
+*  Issue a [get Activity State](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#74-state-api) request to the LRS  
 
 <table>
    <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
@@ -2190,14 +2088,70 @@ https://lrs.adlnet.gov/xapi/activities/state
 &stateId=https://w3id.org/xapi/scorm/attempt-state
 ```  
 
-#### Set xAPI SCORM Activity Attempt State  
-*  Issue a [set Activity State](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#23-state-resource) request to the LRS  
+*  The response content is a [SCORM Attempt State](#scorm-attempt-state) JSON object.  
 
+#### Get xAPI SCORM Activity Profile
+*  Issue a [get Activity Profile](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#actprofapi) request to the LRS  
+
+<table>
+   <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
+   <tr><td>GET</td><td>activities/profile</tr>
+   <tr><th>Parameter</th><th>Value</th></tr>
+   <tr><td>activityId</td><td>Activity IRI</td></tr>
+   <tr><td>profileId</td><td>https://w3id.org/xapi/scorm/activity-profile</td></tr>
+</table>  
+
+_Unencoded and formatted for readability_  
+```
+GET
+https://lrs.adlnet.gov/xapi/activities/profile
+?activityId=http://adlnet.gov/courses/compsci/CS204/lesson01/01/
+&profileId=https://w3id.org/xapi/scorm/activity-profile
+```  
+
+*  The response content is a [SCORM Activity Profile](#scorm-activity-profile) JSON object.  
+
+#### Get xAPI SCORM Agent Profile
+*  Issue a [get Agent Profile](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#76-agent-profile-api) request to the LRS  
+
+<table>
+   <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
+   <tr><td>GET</td><td>agents/profile</tr>
+   <tr><th>Parameter</th><th>Value</th></tr>
+   <tr><td>agent</td><td>Agent object</td></tr>
+   <tr><td>profileId</td><td>https://w3id.org/xapi/scorm/agent-profile</td></tr>
+</table>  
+
+_Unencoded and formatted for readability_  
+```
+GET
+https://lrs.adlnet.gov/xapi/agents/profile
+&agent={"account": {
+            "homePage": "http://lms.adlnet.gov/",
+            "name": "500-627-490"}}
+&profileId=https://w3id.org/xapi/scorm/agent-profile
+```  
+
+*  The response content is a [SCORM Agent Profile](#agent-profile) JSON object.  
+
+#### Get attempt state for current attempt  
+*  Identify the current attempt IRI through launch, attempt IRI generation, or out-of-band configuration  
+*  Issue a [get Activity Attempt State](#get-xapi-scorm-activity-attempt-state) request to the LRS  
+
+#### Set attempt state for current attempt  
+*  Identify the current attempt IRI through launch, attempt IRI generation, or out-of-band configuration  
+*  Attempt to [Get the attempt state JSON object](#get-attempt-state-for-current-attempt) from the LRS
+*  If the response returns the attempt state,
+    *  update with current values
+    *  issue a POST activity state request with the updated JSON object
+*  If the response returns a `404 Not Found`,
+    *  create a new [attempt state JSON object](#scorm-activity-attempt-state) with current values
+    *  issue a PUT activity state request with the new JSON object  
 >NOTE: The request method change of POST or PUT is based on xAPI requirements for updating vs creating a new document. This example demonstrates a generalized case. Organizations are free to update/create the document however works best within the [rules defined in xAPI](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#json-procedure-with-requirements).
 
 <table>
    <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
-   <tr><td>POST/PUT</td><td>activities/state</tr>
+   <tr><td>GET</td><td>activities/state</tr>
    <tr><th>Parameter</th><th>Value</th></tr>
    <tr><td>activityId</td><td>attempt IRI</td></tr>
    <tr><td>agent</td><td>Learner's Agent object</td></tr>
@@ -2221,79 +2175,8 @@ Content Body
 }
 ```  
 
-#### Get xAPI SCORM Activity Profile
-*  Issue a [get Activity Profile](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#27-activity-profile-resource) request to the LRS  
 
-<table>
-   <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
-   <tr><td>GET</td><td>activities/profile</tr>
-   <tr><th>Parameter</th><th>Value</th></tr>
-   <tr><td>activityId</td><td>Activity IRI</td></tr>
-   <tr><td>profileId</td><td>https://w3id.org/xapi/scorm/activity-profile</td></tr>
-</table>  
-
-_Unencoded and formatted for readability_  
-```
-GET
-https://lrs.adlnet.gov/xapi/activities/profile
-?activityId=http://adlnet.gov/courses/compsci/CS204/lesson01/01/
-&profileId=https://w3id.org/xapi/scorm/activity-profile
-```  
-
-*  The response content is a [SCORM Activity Profile](#scorm-activity-profile) JSON object.  
-
-#### Get xAPI SCORM Agent Profile
-*  Issue a [get Agent Profile](https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#26-agent-profile-resource) request to the LRS  
-
-<table>
-   <tr><th>HTTP Method</th><th>Request Endpoint</th></tr>
-   <tr><td>GET</td><td>agents/profile</tr>
-   <tr><th>Parameter</th><th>Value</th></tr>
-   <tr><td>agent</td><td>Agent object</td></tr>
-   <tr><td>profileId</td><td>https://w3id.org/xapi/scorm/agent-profile</td></tr>
-</table>  
-
-_Unencoded and formatted for readability_  
-```
-GET
-https://lrs.adlnet.gov/xapi/agents/profile
-?agent={"account": {
-            "homePage": "http://lms.adlnet.gov/",
-            "name": "500-627-490"}}
-&profileId=https://w3id.org/xapi/scorm/agent-profile
-```  
-
-*  The response content is a [SCORM Agent Profile](#agent-profile) JSON object.  
-
-#### Get activity state for attempts  
-*  Identify the SCO IRI through launch, attempt IRI generation, or out-of-band configuration  
-*  Issue a [get Activity State](#get-xapi-scorm-activity-state) request to the LRS   
-
-#### Set activity state with current attempt  
-*  Identify the current attempt IRI through launch, attempt IRI generation, or out-of-band configuration  
-*  Attempt to [Get the activity state JSON object](#get-activity-state-for-attempts) from the LRS
-*  If the response returns the activity state,
-    *  update by appending current attempt IRI to the `attempts` array
-    *  issue a [POST activity state request](#set-xapi-scorm-activity-state) with the updated JSON object
-*  If the response returns a `404 Not Found`,
-    *  create a new [activity state JSON object](#scorm-activity-state) with current attempt IRI as a single element in the `attempts` array
-    *  issue a [PUT activity state request](#set-xapi-scorm-activity-state) with the new JSON object 
-
-#### Get attempt state for current attempt  
-*  Identify the current attempt IRI through launch, attempt IRI generation, or out-of-band configuration  
-*  Issue a [get Activity Attempt State](#get-xapi-scorm-activity-attempt-state) request to the LRS   
-
-#### Set attempt state for current attempt  
-*  Identify the current attempt IRI through launch, attempt IRI generation, or out-of-band configuration  
-*  Attempt to [Get the attempt state JSON object](#get-attempt-state-for-current-attempt) from the LRS
-*  If the response returns the attempt state,
-    *  update with current values
-    *  issue a [POST activity state request](#set-xapi-scorm-activity-attempt-state) with the updated JSON object
-*  If the response returns a `404 Not Found`,
-    *  create a new [attempt state JSON object](#scorm-activity-attempt-state) with current values
-    *  issue a [PUT activity state request](#set-xapi-scorm-activity-attempt-state) with the new JSON object  
-
-### xAPI SCORM Data Objects
+### XAPI SCORM Data Objects
 #### SCORM Activity State
 __State ID:__ https://w3id.org/xapi/scorm/activity-state
 <table>
@@ -2308,10 +2191,6 @@ __State ID:__ https://w3id.org/xapi/scorm/activity-state
 __State ID:__ https://w3id.org/xapi/scorm/attempt-state
 <table>
 <tr><th>Property</th><th>Description</th></tr>
-<tr>
- <td>comments_from_lms</td>
- <td><a href="#scorm-activity-comment-object">SCORM Activity Comment Object</a></td>
-</tr>
 <tr>
  <td>credit</td>
  <td>String ("credit", "no-credit")</td>
@@ -2342,6 +2221,10 @@ __State ID:__ https://w3id.org/xapi/scorm/attempt-state
 __Profile ID:__ https://w3id.org/xapi/scorm/activity-profile
 <table>
 <tr><th>Property</th><th>Description</th></tr>
+<tr>
+ <td>comments_from_lms</td>
+ <td><a href="#scorm-activity-profile-comment-object">SCORM Activity Profile Comment Object</a></td>
+</tr>
 <tr>
  <td>completion_threshold</td>
  <td>Number (0 to 1)</td>
@@ -2383,7 +2266,7 @@ __Profile ID:__ https://w3id.org/xapi/scorm/agent-profile
 </tr>
 </table>
 
-#### SCORM Activity Comment Object
+#### SCORM Activity Profile Comment Object
 <table>
 <tr><th>Property</th><th>Description</th></tr>
 <tr>
